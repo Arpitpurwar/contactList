@@ -1,5 +1,3 @@
-# phonebook
-Tech - Express JS, MongoDB,Node JS, Token Based Authorization
 #############################################################
 ###   contactList - ExpressJS, MongoDB, Token Based Authorization  ###
 #############################################################
