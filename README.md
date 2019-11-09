@@ -13,10 +13,10 @@
     the **package.json** file where the dependencies are. 
 - In order to run the application with Mongo DB, we will need a file called **.env**
     to contain the connection information.
-- After creating **.env** file write this data
-        SECRET_KEY=write your own secret key
-        PHONEBOOK_DB_URI= write your own mongodb URL
-        PORT=3000
+- After creating **.env** file write data in this format
+    - SECRET_KEY=write your own secret key
+    - PHONEBOOK_DB_URI= write your own mongodb URL
+    - PORT=3000
 
 - Run `npm start` server will start runnning & we will see these below two messages on running console
 listening on port 3000
