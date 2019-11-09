@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Creating contact schema with respective fields
+
 const ContactSchema = new Schema({
     name: {
         type: String,

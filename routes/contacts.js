@@ -4,25 +4,34 @@ const ensureAuth = require('./VerifyToken');
 const { contactValidation, contactUpdateValidation } = require('../common/validation');
 const { ObjectID } = require('mongodb')
 
+/**
+ * Getting all contacts with pagination,page and sorting features
+ * 
+ * */ 
 
-router.get('/getData', ensureAuth, async (req, res) => {
+router.get('/getContacts', ensureAuth, async (req, res) => {
     try {
         const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
         const page = req.query.page ? parseInt(req.query.page) : 1;
-
-
         const contactList = await Contact.find({
             user: req.user._id
         },'-__v').skip((page - 1) * pagination)
             .limit(pagination)
             .sort({ createdAt: -1 });
-
-        res.status(200).send(JSON.stringify(contactList));
+    res.status(200).send(JSON.stringify(contactList));
     } catch (error) {
         res.status(400).send(error);
     }
 
 })
+
+/**
+ * Contact Creation Endpoint for loggedin User
+ * Parameters- name: string
+ * email: string
+ * address: string
+ * 
+ * */ 
 
 router.post('/createContact', ensureAuth, async (req, res) => {
     let { error } = contactValidation(req.body);
@@ -44,6 +53,14 @@ router.post('/createContact', ensureAuth, async (req, res) => {
     }
 
 })
+
+/**
+ * Update contact Endpoint for loggedin User
+ * Parameters- name: string
+ * email: string
+ * address: string
+ * 
+ * */ 
 
 router.put('/updateContact/:id', ensureAuth, async (req, res) => {
     let { error } = contactUpdateValidation(req.body);
@@ -77,6 +94,11 @@ router.put('/updateContact/:id', ensureAuth, async (req, res) => {
     }
 
 })
+
+/**
+ * Delete contact Endpoint for loggedin User
+ * 
+ * */ 
 
 router.delete('/deleteContact/:id', ensureAuth, async (req, res) => {
 

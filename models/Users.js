@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
   
+
+// Creating User schema with respective fields
+
 const UserSchema = new Schema({
     name: {
      type: String,

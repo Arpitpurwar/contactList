@@ -8,14 +8,15 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
-//Connect to DB
+//DB Connection
 
 mongoose.connect(process.env.PHONEBOOK_DB_URI,{ useNewUrlParser: true, useUnifiedTopology: true },()=>{
     console.log("DB Connected");
 });
 mongoose.Promise = global.Promise;
 
-//middleware
+//Application Middleware
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -23,10 +24,11 @@ app.use(bodyParser.json());
 const authRoute = require('./routes/auth');
 const contactRoute = require('./routes/contacts');
 
-//Route Middleware
+// Register api routes
 app.use('/api/user',authRoute);
 app.use('/api',contactRoute);
 
 
-
-app.listen(3000,()=>console.log('Running on 3000'));
+// Port setup 
+let port = process.env.PORT || 3000;
+app.listen(port,()=>console.log(`listening on port ${port}`));

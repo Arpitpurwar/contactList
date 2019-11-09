@@ -1,7 +1,8 @@
 // Import Validation Package
+
 const Joi = require('@hapi/joi');
 
-//Register Validation
+// User register payload Validation
 
 const registerValidation = data => {
     const registerSchema = Joi.object( {
@@ -13,7 +14,9 @@ const registerValidation = data => {
 
     return registerSchema.validate(data);
 }
-//.label('Please enter name more than 6 Letters').message('Please enter correct email format')
+
+// User fogin payload validation
+
 const loginValidation = data => {
     const loginSchema = Joi.object( {
         email: Joi.string().email().required().error(new Error('Email is required & Please enter correct EMAIL FORMAT.')),
@@ -22,6 +25,8 @@ const loginValidation = data => {
 
     return loginSchema.validate(data);
 }
+
+// Contact payload validation during insertion
 
 const contactValidation = data => {
     const contactSchema = Joi.object( {
@@ -32,6 +37,8 @@ const contactValidation = data => {
 
     return contactSchema.validate(data);
 }
+
+// Contact payload validation during update
 
 const contactUpdateValidation = data => {
     const contactSchema = Joi.object( {

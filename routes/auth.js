@@ -5,6 +5,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 
+/**
+ * User Registration Endpoint
+ * Parameters - name : string
+ * email: string
+ * password: string
+ * */ 
+
 router.post('/register', async (req, res) => {
     let { error } = registerValidation(req.body);
     let errorMsg = `${error}`;
@@ -28,6 +35,12 @@ router.post('/register', async (req, res) => {
 
 })
 
+/**
+ * User login Endpoint
+ * Parameters - 
+ * email: string
+ * password: string
+ * */ 
 
 router.post('/login', async (req, res) => {
     let { error } = loginValidation(req.body);
@@ -37,7 +50,7 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (!user) return res.status(400).send("Email or Password is wrong");
 
-    // Password is Correct
+    // Password comparison
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) return res.status(400).send("Email or Password is wrong");
 
