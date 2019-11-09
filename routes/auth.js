@@ -3,6 +3,7 @@ const User = require('../models/Users');
 const { registerValidation, loginValidation } = require('../common/validation');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const ensureAuth = require('./VerifyToken');
 
 
 /**
@@ -28,7 +29,9 @@ router.post('/register', async (req, res) => {
     });
     try {
         let savedUser = await user.save();
-        res.send(JSON.stringify({"msg":"User Successfully Created","data":savedUser}));
+         // Create an token
+        const token = jwt.sign({ _id: savedUser._id }, process.env.SECRET_KEY, { expiresIn: '10m' });
+        res.header('auth-token', token).send(JSON.stringify({"msg":"User Successfully Created","data":savedUser,"auth-token":token}));
     } catch (err) {
         res.status(400).send(err);
     }
@@ -42,21 +45,23 @@ router.post('/register', async (req, res) => {
  * password: string
  * */ 
 
-router.post('/login', async (req, res) => {
+router.post('/login',ensureAuth, async (req, res) => {
     let { error } = loginValidation(req.body);
     let errorMsg = `${error}`;
     if (error) return res.status(400).send(errorMsg);
 
+    try{
     const user = await User.findOne({ email: req.body.email });
     if (!user) return res.status(400).send("Email or Password is wrong");
 
     // Password comparison
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) return res.status(400).send("Email or Password is wrong");
-
-    // Create an token
-    const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY, { expiresIn: '10m' });
-    res.header('auth-token', token).send(JSON.stringify({"msg":"Successfully Loggedin.","auth-token":token}));
+    res.send("Successfully Loggedin");
+    }
+    catch(err){
+        res.status(400).send(err);
+    }
 
 })
 

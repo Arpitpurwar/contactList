@@ -24,6 +24,8 @@ DB Connected
 
 
 ####### Remember points while token authentication
+- After registration, we will get auth-token.
+- After getting auth-token we have to use it with each request to server.
 - In request header key will be auth-token and value will be Recieved token after loggedin.
 {"auth-token":"adsjsl%csmbvs"}
 
@@ -46,7 +48,7 @@ DB Connected
 	    "password":"Heycheci%0"
         }
     
-     - curl -X POST http://localhost:3000/api/user/login -H 'Content-Type: application/json' -d '{"email":"purwarap333@gmail.com","password":"Heycheci%0"}'
+     - curl -X POST http://localhost:3000/api/user/login -H 'Content-Type: application/json' -H 'auth-token:   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaW' -d '{"email":"purwarap333@gmail.com","password":"Heycheci%0"}'
 
  - http://localhost:3000/api/getContacts?page=1&pagination=10
  
