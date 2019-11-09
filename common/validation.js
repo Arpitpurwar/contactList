@@ -45,7 +45,8 @@ const contactUpdateValidation = data => {
     const contactSchema = Joi.object( {
         name: Joi.string().min(6).max(255).error(new Error('Name is required. Character length should be min 6 & max 255.')),
         email: Joi.string().email().error(new Error('Email is required & Please enter correct EMAIL FORMAT.')),
-        address: Joi.string().max(300).error(new Error('Address is required & Character length should be max 300.'))
+        address: Joi.string().max(300).error(new Error('Address is required & Character length should be max 300.')),
+        phone: Joi.number().min(10).error(new Error('Phone is required & It should be min 10 digit.'))
     })
 
     return contactSchema.validate(data);
