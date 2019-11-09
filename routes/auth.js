@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
     if (!validPass) return res.status(400).send("Email or Password is wrong");
 
     // Create an token
-    const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+    const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY, { expiresIn: '10m' });
     res.header('auth-token', token).send(JSON.stringify({"msg":"Successfully Loggedin.","auth-token":token}));
 
 })

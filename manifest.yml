@@ -1,0 +1,5 @@
+---
+applications:
+ - name: contactList
+   random-route: false
+   memory: 123M
