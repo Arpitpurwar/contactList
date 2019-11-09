@@ -11,6 +11,10 @@ const ContactSchema = new Schema({
         max: 255,
         required: true,
     },
+    phone: {
+        type: Number,
+        required: true
+    },
     email: {
         type: String,
         trim: true,

@@ -41,6 +41,7 @@ router.post('/createContact', ensureAuth, async (req, res) => {
     const contact = new Contact({
         name: req.body.name,
         email: req.body.email,
+        phone : req.body.phone,
         address: req.body.address,
         user: req.user._id
     });
@@ -68,7 +69,7 @@ router.put('/updateContact/:id', ensureAuth, async (req, res) => {
     if (error) return res.status(400).send(errorMsg);
 
     const updates = Object.keys(req.body);
-    const allowedUpdates = ["name", "address", "email"];
+    const allowedUpdates = ["name", "address", "email","phone"];
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     if (!isValidOperation) {
         res.status(400).send('Invalid field for updates')
