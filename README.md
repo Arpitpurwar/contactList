@@ -29,7 +29,7 @@ DB Connected
 - In request header key will be auth-token and value will be Recieved token after loggedin.
 {"auth-token":"adsjsl%csmbvs"}
 
-- Token will be expire after 10 minutes.
+- Token will be expire after 10 days.
 
 
 ##### Routes
