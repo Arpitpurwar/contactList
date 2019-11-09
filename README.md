@@ -28,3 +28,47 @@ DB Connected
 {"auth-token":"adsjsl%csmbvs"}
 
 - Token will be expire after 10 minutes.
+
+
+##### Routes
+ - http://localhost:3000/api/user/register
+     - payload - {
+	    "name":"XYZ",
+	    "email":"abc@gmail.com",
+	    "password":"He$1ciewer"
+        } 
+
+    - curl -X POST http://localhost:3000/api/user/register -H 'Content-Type: application/json' -d '{"name": "xyz","email": "xyz@gmail.com","password": "He$1ciewer"}'
+ 
+ - http://localhost:3000/api/user/login
+     - payload - {
+	    "email":"purwarap333@gmail.com",
+	    "password":"Heycheci%0"
+        }
+    
+     - curl -X POST http://localhost:3000/api/user/login -H 'Content-Type: application/json' -d '{"email":"purwarap333@gmail.com","password":"Heycheci%0"}'
+
+ - http://localhost:3000/api/getContacts?page=1&pagination=10
+ 
+    - curl -X GET 'http://localhost:3000/api/getContacts?page=1&pagination=10' -H 'Content-Type: application/json' -H 'auth-token:   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaW' 
+
+ - http://localhost:3000/api/createContact
+     - payload - {
+	    "name":"xyz",
+	    "email":"xyz@gmail.com",
+	    "address":"xyz"
+        } 
+
+    - curl -X POST http://localhost:3000/api/createContact -H 'Content-Type: application/json' -H 'auth-token:              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaW' -d '{"name":"xyz","email":"xyz@gmail.com","address":"xyz"}'
+
+ - http://localhost:3000/api/deleteContact/5dc68cc7ff4df11f1093fd4d
+    - curl -X DELETE http://localhost:3000/api/deleteContact/5dc68cc7ff4df11f1093fd4d -H 'Content-Type: application/json' -H 'auth-token: I4NTgsImV4cCI6MTU3MzI5NjQ1OH0.dyEE3hPXsgDVAPvYvdK4f0VcuVPiHZ3MAR3ZF8_zOmk' 
+
+ - http://localhost:3000/api/updateContact/5dc68cc7ff4df11f1093fd4d
+     - payload - {
+	    "name":"xyz",
+	    "email":"xyz@gmail.com",
+	    "address":"xyz"
+        } 
+
+    - curl -X POST http://localhost:3000/api/updateContact/5dc68cc7ff4df11f1093fd4d -H 'Content-Type: application/json' -H 'auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaW' -d '{"name":"xyz","email":"xyz@gmail.com","address":"xyz"}'
